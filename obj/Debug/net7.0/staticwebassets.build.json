@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "bGuaU6S8eI6CjEMDfGOpI7vH4dpj6JEPwjYlh9Jurc8=",
+  "Source": "PostGresAPI",
+  "BasePath": "_content/PostGresAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
