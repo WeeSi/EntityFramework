@@ -13,12 +13,14 @@ public class BlogController : ControllerBase
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
+    private readonly AppDbContext _context;
 
     private readonly ILogger<BlogController> _logger;
 
-    public BlogController(ILogger<BlogController> logger)
+    public BlogController(ILogger<BlogController> logger, AppDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     [HttpGet(Name = "GetBlogs")]
@@ -41,7 +43,6 @@ public class BlogController : ControllerBase
         }
 
         // Créer une instance de votre contexte de base de données (DbContext)
-        using (AppDbContext dbContext = new())
         {
             // Créer une entité Blog à partir du modèle reçu
             var blogEntity = new Blogs
@@ -51,10 +52,10 @@ public class BlogController : ControllerBase
             };
 
             // Ajouter l'entité à votre contexte de base de données
-            dbContext.Blogs.Add(blogEntity);
+            _context.Blogs.Add(blogEntity);
 
             // Enregistrer les modifications dans la base de données
-            dbContext.SaveChanges();
+            _context.SaveChanges();
         }
 
         return Ok(model);
