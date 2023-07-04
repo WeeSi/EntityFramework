@@ -26,12 +26,7 @@ public class UserController : ControllerBase
     [HttpGet(Name = "GetUsers")]
     public IEnumerable<Users> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new Users
-        {
-            UserName = DateOnly.FromDateTime(DateTime.Now.AddDays(index)).ToString(),
-            UserMail = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+        return _context.Users.ToList();
     }
 
     [HttpPost]
