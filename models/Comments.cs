@@ -5,7 +5,7 @@ namespace PostgreSQL.Data
 {
     public class Comments: BaseModel
     {
-        [Required, Key]
+        [Key]
         public int CommentId { get; set; }
         [Required, MaxLength(40)]
         public string CategoryName { get; set; } = String.Empty;
