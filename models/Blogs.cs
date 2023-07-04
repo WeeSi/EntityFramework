@@ -20,8 +20,8 @@ namespace PostgreSQL.Data
         public Users User { get; set; } = null!;
         public int CategoryId { get; }
         [ForeignKey(nameof(CategoryId))]
-        public Categories Category { get; set; } = null!;
-        public ICollection<Comments> Comments { get; } = new List<Comments>();
-        public ICollection<Tags> Tags { get; } =  new List<Tags>();
+        public Categories? Category { get; set; } = null!;
+        // public ICollection<Comments> Comments { get; } = new List<Comments>();
+        // public ICollection<Tags> Tags { get; } =  new List<Tags>();
     }
 }

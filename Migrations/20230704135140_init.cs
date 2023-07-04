@@ -26,6 +26,19 @@ namespace PostGresAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tags",
+                columns: table => new
+                {
+                    TagId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TagName = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tags", x => x.TagId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -76,7 +89,7 @@ namespace PostGresAPI.Migrations
                 {
                     CommentId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CategoryName = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false),
+                    Comment = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     BlogId = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -95,25 +108,6 @@ namespace PostGresAPI.Migrations
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tags",
-                columns: table => new
-                {
-                    TagId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TagName = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false),
-                    BlogsBlogId = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tags", x => x.TagId);
-                    table.ForeignKey(
-                        name: "FK_Tags_Blogs_BlogsBlogId",
-                        column: x => x.BlogsBlogId,
-                        principalTable: "Blogs",
-                        principalColumn: "BlogId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -135,11 +129,6 @@ namespace PostGresAPI.Migrations
                 name: "IX_Comments_UserId",
                 table: "Comments",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tags_BlogsBlogId",
-                table: "Tags",
-                column: "BlogsBlogId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_UserMail",

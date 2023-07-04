@@ -12,7 +12,7 @@ using PostgreSQL.Data;
 namespace PostGresAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230704090845_init")]
+    [Migration("20230704135140_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -99,7 +99,7 @@ namespace PostGresAPI.Migrations
                     b.Property<int>("BlogId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("CategoryName")
+                    b.Property<string>("Comment")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
@@ -124,17 +124,12 @@ namespace PostGresAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TagId"));
 
-                    b.Property<int?>("BlogsBlogId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("TagName")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
                     b.HasKey("TagId");
-
-                    b.HasIndex("BlogsBlogId");
 
                     b.ToTable("Tags");
                 });
@@ -169,7 +164,7 @@ namespace PostGresAPI.Migrations
             modelBuilder.Entity("PostgreSQL.Data.Blogs", b =>
                 {
                     b.HasOne("PostgreSQL.Data.Categories", "Category")
-                        .WithMany("Blogs")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -188,7 +183,7 @@ namespace PostGresAPI.Migrations
             modelBuilder.Entity("PostgreSQL.Data.Comments", b =>
                 {
                     b.HasOne("PostgreSQL.Data.Blogs", "Blog")
-                        .WithMany("Comments")
+                        .WithMany()
                         .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -202,25 +197,6 @@ namespace PostGresAPI.Migrations
                     b.Navigation("Blog");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("PostgreSQL.Data.Tags", b =>
-                {
-                    b.HasOne("PostgreSQL.Data.Blogs", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("BlogsBlogId");
-                });
-
-            modelBuilder.Entity("PostgreSQL.Data.Blogs", b =>
-                {
-                    b.Navigation("Comments");
-
-                    b.Navigation("Tags");
-                });
-
-            modelBuilder.Entity("PostgreSQL.Data.Categories", b =>
-                {
-                    b.Navigation("Blogs");
                 });
 
             modelBuilder.Entity("PostgreSQL.Data.Users", b =>

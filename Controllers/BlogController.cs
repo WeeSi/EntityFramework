@@ -3,6 +3,8 @@ using PostgreSQL.Data;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+
 namespace PostGresAPI.Controllers;
 
 [ApiController]
@@ -35,7 +37,14 @@ public class BlogController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Blogs model)
+    public async Task<IActionResult> Post(
+        [FromQuery(Name = "Title")] string Title,
+        [FromQuery(Name = "Subtitle")] string Subtitle,
+        [FromQuery(Name = "Description")] string Description,
+        [FromQuery(Name = "Content")] string Content,
+        [FromQuery(Name = "BlogDate")] DateTime BlogDate,
+        [FromQuery(Name = "UserId")] int UserId,
+        [FromQuery(Name = "CategoryId")] int CategoryId)
     {
         if (!ModelState.IsValid)
         {
@@ -44,10 +53,29 @@ public class BlogController : ControllerBase
 
         // Créer une instance de votre contexte de base de données (DbContext)
         // Créer une entité Blog à partir du modèle reçu
+
+        var user = await _context.Users.FindAsync(UserId);
+        if (user == null)
+        {
+            return NotFound($"Utilisateur introuvable pour l'ID {UserId}");
+        }
+
+        // Récupérer le blog associé à l'ID spécifié
+        var category = await _context.Categories.FindAsync(CategoryId);
+        // if (category == null)
+        // {
+        //     return NotFound($"category introuvable pour l'ID {CategoryId}");
+        // }
+
         var blogEntity = new Blogs
         {
-            Title = model.Title,
-            Description = model.Description
+            Title = Title,
+            Description = Description,
+            Subtitle = Subtitle,
+            BlogDate = BlogDate,
+            Content = Content,
+            Category = category,
+            User = user,
         };
 
         // Ajouter l'entité à votre contexte de base de données
@@ -56,6 +84,6 @@ public class BlogController : ControllerBase
         // Enregistrer les modifications dans la base de données
         await _context.SaveChangesAsync();
 
-        return Ok(model);
+        return Ok(blogEntity);
     }
 }
