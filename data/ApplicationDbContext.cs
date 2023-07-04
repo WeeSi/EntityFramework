@@ -17,5 +17,12 @@ namespace PostgreSQL.Data
             // connect to postgres with connection string from app settings
             options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
         }
+
+        public DbSet<Users> Users { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        public DbSet<Blogs> Blogs { get; set; }
+        public DbSet<Tags> Tags { get; set; }
+        public DbSet<BlogTag> BlogTag { get; set; }
+        public DbSet<Comments> Comments { get; set; }
     }
 }
