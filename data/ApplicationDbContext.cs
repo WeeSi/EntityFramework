@@ -18,6 +18,11 @@ namespace PostgreSQL.Data
             options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
         }
 
-        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Customers> Customers { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        public DbSet<Blogs> Blogs { get; set; }
+        public DbSet<Tags> Tags { get; set; }
+        public DbSet<BlogTag> BlogTag { get; set; }
+        public DbSet<Comments> Comments { get; set; }
     }
 }
