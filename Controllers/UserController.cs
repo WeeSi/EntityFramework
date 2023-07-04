@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Mvc;
 using PostgreSQL.Data;
 using System.ComponentModel.DataAnnotations;
@@ -6,38 +7,39 @@ namespace PostGresAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class BlogController : ControllerBase
+public class UserController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<BlogController> _logger;
+    private readonly ILogger<UserController> _logger;
 
-    public BlogController(ILogger<BlogController> logger)
+    public UserController(ILogger<UserController> logger)
     {
         _logger = logger;
     }
 
-    [HttpGet(Name = "GetBlogs")]
-    public IEnumerable<Blogs> Get()
+    [HttpGet(Name = "GetUsers")]
+    public IEnumerable<Users> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new Blogs
+        return Enumerable.Range(1, 5).Select(index => new Users
         {
-            Title = DateOnly.FromDateTime(DateTime.Now.AddDays(index)).ToString(),
-            Description = Summaries[Random.Shared.Next(Summaries.Length)],
+            UserName = DateOnly.FromDateTime(DateTime.Now.AddDays(index)).ToString(),
+            UserMail = Summaries[Random.Shared.Next(Summaries.Length)]
         })
         .ToArray();
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] Blogs model)
+    public IActionResult Post([FromBody] Users model)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(model);
+
+        return Ok();
     }
 }
