@@ -20,17 +20,18 @@ namespace PostgreSQL.Data
     }
     public class AppDbContext : DbContext
     {
-        protected readonly IConfiguration Configuration;
+        protected readonly IConfiguration _configuration;
 
         public AppDbContext(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             // connect to postgres with connection string from app settings
-            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+            //options.UseNpgsql("USER ID = postgres; Password=password; Server=localhost; Port=5432; Database=EntityFramework; Integrated Security=true; Pooling=true;");
+            options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,8 +40,8 @@ namespace PostgreSQL.Data
             modelBuilder.RegisterAllEntities<BaseModel>(entitiesAssembly);
         }
         // public DbSet<Customers> Customers { get; set; }
-        // public DbSet<Categories> Categories { get; set; }
-        // public DbSet<Blogs> Blogs { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        public DbSet<Blogs> Blogs { get; set; }
         // public DbSet<Tags> Tags { get; set; }
         // public DbSet<BlogTag> BlogTag { get; set; }
         // public DbSet<Comments> Comments { get; set; }

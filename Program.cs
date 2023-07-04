@@ -1,5 +1,5 @@
+using Microsoft.EntityFrameworkCore;
 using PostgreSQL.Data;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +10,10 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddDbContext<AppDbContext>(
+options => options.UseNpgsql("USER ID = postgres; Password=password; Server=localhost; Port=5432; Database=EntityFramework; Integrated Security=true; Pooling=true;"));
 
 var app = builder.Build();
 
