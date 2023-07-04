@@ -35,7 +35,7 @@ public class BlogController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] Blogs model)
+     public async Task<IActionResult> Post([FromBody] Blogs model)
     {
         if (!ModelState.IsValid)
         {
@@ -43,7 +43,6 @@ public class BlogController : ControllerBase
         }
 
         // Créer une instance de votre contexte de base de données (DbContext)
-        {
             // Créer une entité Blog à partir du modèle reçu
             var blogEntity = new Blogs
             {
@@ -55,8 +54,7 @@ public class BlogController : ControllerBase
             _context.Blogs.Add(blogEntity);
 
             // Enregistrer les modifications dans la base de données
-            _context.SaveChanges();
-        }
+            await _context.SaveChangesAsync();
 
         return Ok(model);
     }
