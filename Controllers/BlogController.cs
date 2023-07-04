@@ -54,7 +54,7 @@ public class BlogController : ControllerBase
             dbContext.Blogs.Add(blogEntity);
 
             // Enregistrer les modifications dans la base de données
-            dbContext.SaveChanges();
+            dbContext.SaveChangesAsync();
         }
 
         return Ok(model);
