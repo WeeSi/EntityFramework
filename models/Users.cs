@@ -6,7 +6,7 @@ namespace PostgreSQL.Data
     [Index(nameof(UserMail)), Index(nameof(UserName), Name = "UserPseudo")]
     public class Users
     {
-        [Required, Key, MaxLength(5)]
+        [Key]
         public int UserId { get; set; }
         [Required, MaxLength(40)]
         public string UserName { get; set; } = String.Empty;

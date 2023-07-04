@@ -22,26 +22,6 @@ namespace PostGresAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("PostgreSQL.Data.BlogTag", b =>
-                {
-                    b.Property<int>("BlogId")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(2);
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("BlogId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("BlogTag");
-                });
-
             modelBuilder.Entity("PostgreSQL.Data.Blogs", b =>
                 {
                     b.Property<int>("BlogId")
@@ -60,16 +40,10 @@ namespace PostGresAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("Subtitle")
                         .IsRequired()
@@ -81,11 +55,14 @@ namespace PostGresAPI.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("BlogId");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Blogs");
                 });
@@ -102,9 +79,6 @@ namespace PostGresAPI.Migrations
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
 
                     b.HasKey("CategoryId");
 
@@ -127,50 +101,16 @@ namespace PostGresAPI.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int>("UserId")
                         .HasColumnType("integer");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
 
                     b.HasKey("CommentId");
 
                     b.HasIndex("BlogId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("PostgreSQL.Data.Customers", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(5)
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CustomerId"));
-
-                    b.Property<string>("CustomerMail")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("character varying(40)");
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("character varying(40)");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("CustomerId");
-
-                    b.HasIndex("CustomerMail");
-
-                    b.HasIndex(new[] { "CustomerName" }, "UserPseudo");
-
-                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("PostgreSQL.Data.Tags", b =>
@@ -181,8 +121,8 @@ namespace PostGresAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TagId"));
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+                    b.Property<int?>("BlogsBlogId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("TagName")
                         .IsRequired()
@@ -191,26 +131,36 @@ namespace PostGresAPI.Migrations
 
                     b.HasKey("TagId");
 
+                    b.HasIndex("BlogsBlogId");
+
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("PostgreSQL.Data.BlogTag", b =>
+            modelBuilder.Entity("PostgreSQL.Data.Users", b =>
                 {
-                    b.HasOne("PostgreSQL.Data.Blogs", "Post")
-                        .WithMany("BlogTags")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
 
-                    b.HasOne("PostgreSQL.Data.Tags", "Tag")
-                        .WithMany("BlogTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
-                    b.Navigation("Post");
+                    b.Property<string>("UserMail")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
 
-                    b.Navigation("Tag");
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("UserMail");
+
+                    b.HasIndex(new[] { "UserName" }, "UserPseudo");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("PostgreSQL.Data.Blogs", b =>
@@ -221,15 +171,15 @@ namespace PostGresAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PostgreSQL.Data.Customers", "Customer")
+                    b.HasOne("PostgreSQL.Data.Users", "User")
                         .WithMany("Blogs")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
 
-                    b.Navigation("Customer");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PostgreSQL.Data.Comments", b =>
@@ -240,22 +190,29 @@ namespace PostGresAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PostgreSQL.Data.Customers", "Customer")
+                    b.HasOne("PostgreSQL.Data.Users", "User")
                         .WithMany("Comments")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Blog");
 
-                    b.Navigation("Customer");
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PostgreSQL.Data.Tags", b =>
+                {
+                    b.HasOne("PostgreSQL.Data.Blogs", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("BlogsBlogId");
                 });
 
             modelBuilder.Entity("PostgreSQL.Data.Blogs", b =>
                 {
-                    b.Navigation("BlogTags");
-
                     b.Navigation("Comments");
+
+                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("PostgreSQL.Data.Categories", b =>
@@ -263,16 +220,11 @@ namespace PostGresAPI.Migrations
                     b.Navigation("Blogs");
                 });
 
-            modelBuilder.Entity("PostgreSQL.Data.Customers", b =>
+            modelBuilder.Entity("PostgreSQL.Data.Users", b =>
                 {
                     b.Navigation("Blogs");
 
                     b.Navigation("Comments");
-                });
-
-            modelBuilder.Entity("PostgreSQL.Data.Tags", b =>
-                {
-                    b.Navigation("BlogTags");
                 });
 #pragma warning restore 612, 618
         }

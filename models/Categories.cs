@@ -5,7 +5,7 @@ namespace PostgreSQL.Data
 {
     public class Categories: BaseModel
     {
-        [Required, Key]
+        [Key]
         public int CategoryId { get; set; }
         [Required, MaxLength(40)]
         public string CategoryName { get; set; } = String.Empty;

@@ -5,7 +5,7 @@ namespace PostgreSQL.Data
 {
     public class Blogs: BaseModel
     {
-        [Required, Key]
+        [Key]
         public int BlogId { get; set; }
         public DateTime BlogDate { get; set; }
         [MaxLength(40)]
@@ -22,6 +22,6 @@ namespace PostgreSQL.Data
         [ForeignKey(nameof(CategoryId))]
         public Categories Category { get; set; } = null!;
         public ICollection<Comments> Comments { get; } = new List<Comments>();
-        public List<BlogTag> BlogTags { get; } = new();
+        public ICollection<Tags> Tags { get; } =  new List<Tags>();
     }
 }

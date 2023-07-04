@@ -2,5 +2,5 @@ using System;
 
 public abstract class BaseModel
 {
-    public Guid Id { get; set; }
+    private Guid Id { get; set; }
 }
