@@ -17,7 +17,5 @@ namespace PostgreSQL.Data
             // connect to postgres with connection string from app settings
             options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
         }
-
-        public DbSet<Employee> Employee { get; set; }
     }
 }

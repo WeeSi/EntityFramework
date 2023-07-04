@@ -1528,23 +1528,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\GrégoireRATURAT\\.nuget\\packages\\": {},
+    "C:\\Users\\franc\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Travail\\Isitech\\M2\\Entity Framework\\PostGresAPI\\PostGresAPI.csproj",
+      "projectUniqueName": "D:\\Isitech\\Entity Framework\\EntityFramework\\PostGresAPI.csproj",
       "projectName": "PostGresAPI",
-      "projectPath": "D:\\Travail\\Isitech\\M2\\Entity Framework\\PostGresAPI\\PostGresAPI.csproj",
-      "packagesPath": "C:\\Users\\GrégoireRATURAT\\.nuget\\packages\\",
-      "outputPath": "D:\\Travail\\Isitech\\M2\\Entity Framework\\PostGresAPI\\obj\\",
+      "projectPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\PostGresAPI.csproj",
+      "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
+      "outputPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\GrégoireRATURAT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
