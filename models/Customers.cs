@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace PostgreSQL.Data
 {
     [Index(nameof(CustomerMail)),Index(nameof(CustomerName), Name = "UserPseudo")]
-    public class Customers
+    public class Customers: BaseModel
     {
         [Required, Key, MaxLength(5)]
         public int CustomerId { get; set; }

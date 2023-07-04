@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PostgreSQL.Data
 {
-    public class Categories
+    public class Categories: BaseModel
     {
         [Required, Key]
         public int CategoryId { get; set; }
