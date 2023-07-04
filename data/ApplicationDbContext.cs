@@ -22,11 +22,6 @@ namespace PostgreSQL.Data
     {
         protected readonly IConfiguration Configuration;
 
-        public AppDbContext(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             // connect to postgres with connection string from app settings
@@ -40,7 +35,7 @@ namespace PostgreSQL.Data
         }
         // public DbSet<Customers> Customers { get; set; }
         // public DbSet<Categories> Categories { get; set; }
-        // public DbSet<Blogs> Blogs { get; set; }
+        public DbSet<Blogs> Blogs { get; set; }
         // public DbSet<Tags> Tags { get; set; }
         // public DbSet<BlogTag> BlogTag { get; set; }
         // public DbSet<Comments> Comments { get; set; }

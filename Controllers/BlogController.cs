@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PostgreSQL.Data;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 namespace PostGresAPI.Controllers;
 
 [ApiController]
@@ -38,6 +39,24 @@ public class BlogController : ControllerBase
         {
             return BadRequest(ModelState);
         }
+
+        // Créer une instance de votre contexte de base de données (DbContext)
+        using (AppDbContext dbContext = new())
+        {
+            // Créer une entité Blog à partir du modèle reçu
+            var blogEntity = new Blogs
+            {
+                Title = model.Title,
+                Description = model.Description
+            };
+
+            // Ajouter l'entité à votre contexte de base de données
+            dbContext.Blogs.Add(blogEntity);
+
+            // Enregistrer les modifications dans la base de données
+            dbContext.SaveChanges();
+        }
+
         return Ok(model);
     }
 }
