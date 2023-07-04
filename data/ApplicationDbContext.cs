@@ -39,7 +39,7 @@ namespace PostgreSQL.Data
             var entitiesAssembly = typeof(BaseModel).Assembly;
             modelBuilder.RegisterAllEntities<BaseModel>(entitiesAssembly);
         }
-        // public DbSet<Customers> Customers { get; set; }
+        public DbSet<Users> Users { get; set; }
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Blogs> Blogs { get; set; }
         // public DbSet<Tags> Tags { get; set; }

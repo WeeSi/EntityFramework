@@ -26,11 +26,7 @@ public class CategoryController : ControllerBase
     [HttpGet(Name = "GetCategories")]
     public IEnumerable<Categories> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new Categories
-        {
-            CategoryName = DateOnly.FromDateTime(DateTime.Now.AddDays(index)).ToString(),
-        })
-        .ToArray();
+        return _context.Categories.ToList();
     }
 
     [HttpPost]
