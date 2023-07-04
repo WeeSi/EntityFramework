@@ -8,16 +8,16 @@ namespace PostgreSQL.Data
         [Required, Key]
         public int BlogId { get; set; }
         public DateTime BlogDate { get; set; }
-        [ MaxLength(40)]
+        [MaxLength(40)]
         public string Title { get; set; } = String.Empty;
-        [ MaxLength(60)]
+        [MaxLength(60)]
         public string Subtitle { get; set; } = String.Empty;
-        [ MaxLength(150)]
+        [MaxLength(150)]
         public string Description { get; set; } = String.Empty;
         public string Content { get; set; } = String.Empty;
-        public int CustomerId { get; }
-        [ForeignKey(nameof(CustomerId))]
-        public Customers Customer { get; set; } = null!;
+        public int UserId { get; }
+        [ForeignKey(nameof(UserId))]
+        public Users User { get; set; } = null!;
         public int CategoryId { get; }
         [ForeignKey(nameof(CategoryId))]
         public Categories Category { get; set; } = null!;

@@ -3,15 +3,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PostgreSQL.Data
 {
-    [Index(nameof(CustomerMail)),Index(nameof(CustomerName), Name = "UserPseudo")]
-    public class Customers
+    [Index(nameof(UserMail)), Index(nameof(UserName), Name = "UserPseudo")]
+    public class Users
     {
         [Required, Key, MaxLength(5)]
-        public int CustomerId { get; set; }
+        public int UserId { get; set; }
         [Required, MaxLength(40)]
-        public string CustomerName { get; set; } = String.Empty;
+        public string UserName { get; set; } = String.Empty;
         [Required, MaxLength(40)]
-        public string CustomerMail { get; set; } = String.Empty;
+        public string UserMail { get; set; } = String.Empty;
         public ICollection<Blogs> Blogs { get; } = new List<Blogs>();
         public ICollection<Comments> Comments { get; } = new List<Comments>();
     }

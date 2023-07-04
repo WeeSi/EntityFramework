@@ -9,9 +9,9 @@ namespace PostgreSQL.Data
         public int CommentId { get; set; }
         [Required, MaxLength(40)]
         public string CategoryName { get; set; } = String.Empty;
-        public int CustomerId { get; }
-        [ForeignKey(nameof(CustomerId))]
-        public Customers Customer { get; set; } = null!;
+        public int UserId { get; }
+        [ForeignKey(nameof(UserId))]
+        public Users User { get; set; } = null!;
         public int BlogId { get; }
         [ForeignKey(nameof(BlogId))]
         public Blogs Blog { get; set; } = null!;

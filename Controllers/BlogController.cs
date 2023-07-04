@@ -21,18 +21,18 @@ public class BlogController : ControllerBase
     }
 
     [HttpGet(Name = "GetBlogs")]
-    public IEnumerable<Blog> Get()
+    public IEnumerable<Blogs> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new Blog
+        return Enumerable.Range(1, 5).Select(index => new Blogs
         {
-            CategoryName = DateOnly.FromDateTime(DateTime.Now.AddDays(index)).ToString(),
+            Title = DateOnly.FromDateTime(DateTime.Now.AddDays(index)).ToString(),
             Description = Summaries[Random.Shared.Next(Summaries.Length)]
         })
         .ToArray();
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] Blog model)
+    public IActionResult Post([FromBody] Blogs model)
     {
         if (!ModelState.IsValid)
         {
