@@ -32,6 +32,9 @@ namespace PostGresAPI.Migrations
                         .HasColumnType("integer")
                         .HasColumnOrder(2);
 
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
                     b.HasKey("BlogId", "TagId");
 
                     b.HasIndex("TagId");
@@ -65,6 +68,9 @@ namespace PostGresAPI.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
 
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Subtitle")
                         .IsRequired()
                         .HasMaxLength(60)
@@ -97,6 +103,9 @@ namespace PostGresAPI.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
@@ -120,6 +129,9 @@ namespace PostGresAPI.Migrations
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("integer");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
 
                     b.HasKey("CommentId");
 
@@ -149,6 +161,9 @@ namespace PostGresAPI.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
                     b.HasKey("CustomerId");
 
                     b.HasIndex("CustomerMail");
@@ -165,6 +180,9 @@ namespace PostGresAPI.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TagId"));
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("TagName")
                         .IsRequired()

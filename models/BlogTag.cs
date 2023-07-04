@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace PostgreSQL.Data
 {
     [PrimaryKey(nameof(BlogId), nameof(TagId))]
-    public class BlogTag
+    public class BlogTag: BaseModel
     {
         [Required]
         [Column(Order=1)]

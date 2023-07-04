@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PostgreSQL.Data
 {
-    public class Tags
+    public class Tags: BaseModel
     {
         [Required, Key]
         public int TagId { get; set; }

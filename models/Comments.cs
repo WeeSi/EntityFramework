@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PostgreSQL.Data
 {
-    public class Comments
+    public class Comments: BaseModel
     {
         [Required, Key]
         public int CommentId { get; set; }
