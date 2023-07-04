@@ -25,7 +25,7 @@ public class CommentController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Comments model)
+    public async Task<IActionResult> Post([Bind("Comment,UserId,BlogId")] Comments model)
     {
         if (!ModelState.IsValid)
         {
