@@ -42,10 +42,8 @@ namespace PostgreSQL.Data
         public DbSet<Users> Users { get; set; }
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Blogs> Blogs { get; set; }
-        // public DbSet<Tags> Tags { get; set; }
-        // public DbSet<BlogTag> BlogTag { get; set; }
-        // public DbSet<Comments> Comments { get; set; }
-        // public DbSet<WeatherForecast> WeatherForecast { get; set; }
+        public DbSet<Tags> Tags { get; set; }
+        public DbSet<Comments> Comments { get; set; }
     }
 
 }
