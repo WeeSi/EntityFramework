@@ -4,31 +4,30 @@ using PostgreSQL.Data;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using EFCore.Common.EntityModels;
+using Microsoft.Extensions.Logging;
 namespace PostGresAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController : ControllerBase
+public class TagController : ControllerBase
 {
-    private readonly ILogger<UserController> _logger;
+    private readonly ILogger<TagController> _logger;
     private readonly AppDbContext _context;
 
-    public UserController(ILogger<UserController> logger, AppDbContext context)
+    public TagController(ILogger<TagController> logger, AppDbContext context)
     {
         _logger = logger;
         _context = context;
     }
 
-    [HttpGet(Name = "GetUsers")]
-    public IEnumerable<Users> Get()
+    [HttpGet(Name = "GetTags")]
+    public IEnumerable<Tags> Get()
     {
-        return _context.Users.ToList();
+        return _context.Tags.ToList();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(
-        [FromQuery(Name = "UserName")] string UserName,
-        [FromQuery(Name = "UserMail")] string UserMail)
+    public async Task<IActionResult> Post([FromQuery(Name = "TagName")] string TagName)
     {
         if (!ModelState.IsValid)
         {
@@ -37,18 +36,17 @@ public class UserController : ControllerBase
 
         // Créer une instance de votre contexte de base de données (DbContext)
         // Créer une entité Blog à partir du modèle reçu
-        var userEntity = new Users
+        var tagEntity = new Tags
         {
-            UserName = UserName,
-            UserMail = UserMail,
+            TagName = TagName,
         };
 
         // Ajouter l'entité à votre contexte de base de données
-        _context.Users.Add(userEntity);
+        _context.Tags.Add(tagEntity);
 
         // Enregistrer les modifications dans la base de données
         await _context.SaveChangesAsync();
 
-        return Ok(userEntity);
+        return Ok(tagEntity);
     }
 }

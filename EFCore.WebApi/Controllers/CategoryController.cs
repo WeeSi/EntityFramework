@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using EFCore.Common.EntityModels;
+using Microsoft.Extensions.Logging;
 namespace PostGresAPI.Controllers;
 
 [ApiController]
