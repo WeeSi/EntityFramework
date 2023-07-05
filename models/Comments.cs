@@ -7,13 +7,13 @@ namespace PostgreSQL.Data
     {
         [Key]
         public int CommentId { get; set; }
-        [Required, MaxLength(40)]
+        [MaxLength(40)]
         public string Comment { get; set; } = String.Empty;
-        public int UserId { get; }
         [ForeignKey(nameof(UserId))]
-        public Users User { get; set; } = null!;
-        public int BlogId { get; }
+        public int UserId { get; set; }
+        // public Users User { get; set; } = null!;
         [ForeignKey(nameof(BlogId))]
-        public Blogs Blog { get; set; } = null!;
+        public int BlogId { get; set; }
+        // public Blogs Blog { get; set; } = null!;
     }
 }

@@ -7,7 +7,7 @@ namespace PostgreSQL.Data
     {
         [Key]
         public int CategoryId { get; set; }
-        [Required, MaxLength(40)]
+        [MaxLength(40)]
         public string CategoryName { get; set; } = String.Empty;
     }
 }

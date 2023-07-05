@@ -25,7 +25,9 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Users model)
+    public async Task<IActionResult> Post(
+        [FromQuery(Name = "UserName")] string UserName,
+        [FromQuery(Name = "UserMail")] string UserMail)
     {
         if (!ModelState.IsValid)
         {
@@ -36,8 +38,8 @@ public class UserController : ControllerBase
         // Créer une entité Blog à partir du modèle reçu
         var userEntity = new Users
         {
-            UserName = model.UserName,
-            UserMail = model.UserMail,
+            UserName = UserName,
+            UserMail = UserMail,
         };
 
         // Ajouter l'entité à votre contexte de base de données
@@ -46,6 +48,6 @@ public class UserController : ControllerBase
         // Enregistrer les modifications dans la base de données
         await _context.SaveChangesAsync();
 
-        return Ok(model);
+        return Ok(userEntity);
     }
 }

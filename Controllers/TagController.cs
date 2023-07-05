@@ -25,7 +25,7 @@ public class TagController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Tags model)
+    public async Task<IActionResult> Post([FromQuery(Name = "TagName")] string TagName)
     {
         if (!ModelState.IsValid)
         {
@@ -36,7 +36,7 @@ public class TagController : ControllerBase
         // Créer une entité Blog à partir du modèle reçu
         var tagEntity = new Tags
         {
-            TagName = model.TagName,
+            TagName = TagName,
         };
 
         // Ajouter l'entité à votre contexte de base de données
@@ -45,6 +45,6 @@ public class TagController : ControllerBase
         // Enregistrer les modifications dans la base de données
         await _context.SaveChangesAsync();
 
-        return Ok(model);
+        return Ok(tagEntity);
     }
 }

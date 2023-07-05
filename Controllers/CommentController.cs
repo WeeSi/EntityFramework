@@ -25,33 +25,36 @@ public class CommentController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([Bind("Comment,UserId,BlogId")] Comments model)
+    public async Task<IActionResult> Post(
+        [FromQuery(Name = "Comment")] string Comment,
+        [FromQuery(Name = "UserId")] int UserId,
+        [FromQuery(Name = "BlogId")] int BlogId)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        var user = await _context.Users.FindAsync(model.UserId);
+        var user = await _context.Users.FindAsync(UserId);
         if (user == null)
         {
-            return NotFound($"Utilisateur introuvable pour l'ID {model.UserId}");
+            return NotFound($"Utilisateur introuvable pour l'ID {UserId}");
         }
 
         // Récupérer le blog associé à l'ID spécifié
-        var blog = await _context.Blogs.FindAsync(model.BlogId);
+        var blog = await _context.Blogs.FindAsync(BlogId);
         if (blog == null)
         {
-            return NotFound($"Blog introuvable pour l'ID {model.BlogId}");
+            return NotFound($"Blog introuvable pour l'ID {BlogId}");
         }
 
         // Créer une instance de votre contexte de base de données (DbContext)
         // Créer une entité Blog à partir du modèle reçu
         var commentEntity = new Comments
         {
-            Comment = model.Comment,
-            Blog = blog,
-            User = user
+            Comment = Comment,
+            BlogId = BlogId,
+            UserId = UserId
         };
 
         // Ajouter l'entité à votre contexte de base de données
@@ -60,6 +63,6 @@ public class CommentController : ControllerBase
         // Enregistrer les modifications dans la base de données
         await _context.SaveChangesAsync();
 
-        return Ok(model);
+        return Ok(commentEntity);
     }
 }

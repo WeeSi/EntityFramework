@@ -28,23 +28,25 @@ public class BlogController : ControllerBase
     [HttpGet(Name = "GetBlogs")]
     public IEnumerable<Blogs> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new Blogs
-        {
-            Title = DateOnly.FromDateTime(DateTime.Now.AddDays(index)).ToString(),
-            Description = Summaries[Random.Shared.Next(Summaries.Length)],
-        })
-        .ToArray();
+        return _context.Blogs.ToList();
+        // return Enumerable.Range(1, 5).Select(index => new Blogs
+        // {
+        //     Title = DateOnly.FromDateTime(DateTime.Now.AddDays(index)).ToString(),
+        //     Description = Summaries[Random.Shared.Next(Summaries.Length)],
+        // })
+        // .ToArray();
     }
 
     [HttpPost]
     public async Task<IActionResult> Post(
         [FromQuery(Name = "Title")] string Title,
-        [FromQuery(Name = "Subtitle")] string Subtitle,
-        [FromQuery(Name = "Description")] string Description,
+        [FromQuery(Name = "Subtitle")] string? Subtitle,
+        [FromQuery(Name = "Description")] string? Description,
         [FromQuery(Name = "Content")] string Content,
         [FromQuery(Name = "BlogDate")] DateTime BlogDate,
         [FromQuery(Name = "UserId")] int UserId,
-        [FromQuery(Name = "CategoryId")] int CategoryId)
+        [FromQuery(Name = "CategoryId")] int CategoryId,
+        [FromQuery(Name = "TagIds")] List<int> Tags)
     {
         if (!ModelState.IsValid)
         {
@@ -53,7 +55,15 @@ public class BlogController : ControllerBase
 
         // Créer une instance de votre contexte de base de données (DbContext)
         // Créer une entité Blog à partir du modèle reçu
-
+        var TagsList = new List<Tags>();
+         foreach (int tagId in Tags){
+            var tag = await _context.Tags.FindAsync(tagId);
+            if (tag == null)
+            {
+                return NotFound($"Tag introuvable pour l'ID {tagId}");
+            }
+            else TagsList.Add(tag);
+        };
         var user = await _context.Users.FindAsync(UserId);
         if (user == null)
         {
@@ -62,10 +72,10 @@ public class BlogController : ControllerBase
 
         // Récupérer le blog associé à l'ID spécifié
         var category = await _context.Categories.FindAsync(CategoryId);
-        // if (category == null)
-        // {
-        //     return NotFound($"category introuvable pour l'ID {CategoryId}");
-        // }
+        if (category == null)
+        {
+            return NotFound($"category introuvable pour l'ID {CategoryId}");
+        }
 
         var blogEntity = new Blogs
         {
@@ -75,7 +85,8 @@ public class BlogController : ControllerBase
             BlogDate = BlogDate,
             Content = Content,
             Category = category,
-            User = user,
+            UserId = UserId,
+            Tags = TagsList
         };
 
         // Ajouter l'entité à votre contexte de base de données

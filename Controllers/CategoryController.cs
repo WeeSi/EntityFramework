@@ -30,7 +30,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Categories model)
+    public async Task<IActionResult> Post([FromQuery(Name = "CategoryName")] string CategoryName)
     {
         if (!ModelState.IsValid)
         {
@@ -41,7 +41,7 @@ public class CategoryController : ControllerBase
         // Créer une entité Blog à partir du modèle reçu
         var categoryEntity = new Categories
         {
-            CategoryName = model.CategoryName,
+            CategoryName = CategoryName,
         };
 
         // Ajouter l'entité à votre contexte de base de données
@@ -50,6 +50,6 @@ public class CategoryController : ControllerBase
         // Enregistrer les modifications dans la base de données
         await _context.SaveChangesAsync();
 
-        return Ok(model);
+        return Ok(categoryEntity);
     }
 }

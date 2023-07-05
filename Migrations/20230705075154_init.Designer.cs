@@ -12,7 +12,7 @@ using PostgreSQL.Data;
 namespace PostGresAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230704135140_init")]
+    [Migration("20230705075154_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -44,12 +44,10 @@ namespace PostGresAPI.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
 
                     b.Property<string>("Subtitle")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("character varying(60)");
 
@@ -61,11 +59,14 @@ namespace PostGresAPI.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("UsersUserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("BlogId");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UsersUserId");
 
                     b.ToTable("Blogs");
                 });
@@ -99,6 +100,9 @@ namespace PostGresAPI.Migrations
                     b.Property<int>("BlogId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("BlogsBlogId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasMaxLength(40)
@@ -107,11 +111,14 @@ namespace PostGresAPI.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("UsersUserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("CommentId");
 
-                    b.HasIndex("BlogId");
+                    b.HasIndex("BlogsBlogId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UsersUserId");
 
                     b.ToTable("Comments");
                 });
@@ -124,12 +131,17 @@ namespace PostGresAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TagId"));
 
+                    b.Property<int?>("BlogsBlogId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("TagName")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
                     b.HasKey("TagId");
+
+                    b.HasIndex("BlogsBlogId");
 
                     b.ToTable("Tags");
                 });
@@ -169,34 +181,36 @@ namespace PostGresAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PostgreSQL.Data.Users", "User")
+                    b.HasOne("PostgreSQL.Data.Users", null)
                         .WithMany("Blogs")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsersUserId");
 
                     b.Navigation("Category");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PostgreSQL.Data.Comments", b =>
                 {
-                    b.HasOne("PostgreSQL.Data.Blogs", "Blog")
-                        .WithMany()
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PostgreSQL.Data.Users", "User")
+                    b.HasOne("PostgreSQL.Data.Blogs", null)
                         .WithMany("Comments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BlogsBlogId");
 
-                    b.Navigation("Blog");
+                    b.HasOne("PostgreSQL.Data.Users", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("UsersUserId");
+                });
 
-                    b.Navigation("User");
+            modelBuilder.Entity("PostgreSQL.Data.Tags", b =>
+                {
+                    b.HasOne("PostgreSQL.Data.Blogs", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("BlogsBlogId");
+                });
+
+            modelBuilder.Entity("PostgreSQL.Data.Blogs", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("PostgreSQL.Data.Users", b =>

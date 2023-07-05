@@ -8,11 +8,11 @@ namespace PostgreSQL.Data
     {
         [Key]
         public int UserId { get; set; }
-        [Required, MaxLength(40)]
+        [MaxLength(40)]
         public string UserName { get; set; } = String.Empty;
-        [Required, MaxLength(40)]
+        [MaxLength(40)]
         public string UserMail { get; set; } = String.Empty;
-        public ICollection<Blogs> Blogs { get; } = new List<Blogs>();
-        public ICollection<Comments> Comments { get; } = new List<Comments>();
+        public ICollection<Blogs> Blogs { get; set;  } = new List<Blogs>();
+        public ICollection<Comments> Comments { get; set;  } = new List<Comments>();
     }
 }

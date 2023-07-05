@@ -6,7 +6,7 @@ namespace PostgreSQL.Data
     {
         [Key]
         public int TagId { get; set; }
-        [Required, MaxLength(40)]
+        [MaxLength(40)]
         public string TagName { get; set; } = String.Empty;
     }
 }
