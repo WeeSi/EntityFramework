@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Travail\\Isitech\\M2\\Entity Framework\\PostGresAPI\\PostGresAPI.csproj": {}
+    "D:\\Isitech\\Entity Framework\\EntityFramework\\PostGresAPI.csproj": {}
   },
   "projects": {
-    "D:\\Travail\\Isitech\\M2\\Entity Framework\\PostGresAPI\\PostGresAPI.csproj": {
+    "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.DataContext\\EFCore.Common.DataContext.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Travail\\Isitech\\M2\\Entity Framework\\PostGresAPI\\PostGresAPI.csproj",
-        "projectName": "PostGresAPI",
-        "projectPath": "D:\\Travail\\Isitech\\M2\\Entity Framework\\PostGresAPI\\PostGresAPI.csproj",
-        "packagesPath": "C:\\Users\\GrégoireRATURAT\\.nuget\\packages\\",
-        "outputPath": "D:\\Travail\\Isitech\\M2\\Entity Framework\\PostGresAPI\\obj\\",
+        "projectUniqueName": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.DataContext\\EFCore.Common.DataContext.csproj",
+        "projectName": "EFCore.Common.DataContext",
+        "projectPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.DataContext\\EFCore.Common.DataContext.csproj",
+        "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
+        "outputPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.DataContext\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\GrégoireRATURAT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,98 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.305\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.EntityModels\\EFCore.Common.EntityModels.csproj": {
+                "projectPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.EntityModels\\EFCore.Common.EntityModels.csproj"
+              },
+              "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common\\EFCore.Common.csproj": {
+                "projectPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common\\EFCore.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.305\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.EntityModels\\EFCore.Common.EntityModels.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.EntityModels\\EFCore.Common.EntityModels.csproj",
+        "projectName": "EFCore.Common.EntityModels",
+        "projectPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.EntityModels\\EFCore.Common.EntityModels.csproj",
+        "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
+        "outputPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.EntityModels\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -51,19 +142,204 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.5.0, )"
+              "version": "[7.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "target": "Package",
-              "version": "[6.5.0, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
-              "version": "[6.5.0, )"
+              "version": "[7.0.0, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
+              "version": "[7.0.4, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
               "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.305\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common\\EFCore.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common\\EFCore.Common.csproj",
+        "projectName": "EFCore.Common",
+        "projectPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common\\EFCore.Common.csproj",
+        "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
+        "outputPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.EntityModels\\EFCore.Common.EntityModels.csproj": {
+                "projectPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.EntityModels\\EFCore.Common.EntityModels.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.305\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Isitech\\Entity Framework\\EntityFramework\\PostGresAPI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Isitech\\Entity Framework\\EntityFramework\\PostGresAPI.csproj",
+        "projectName": "PostGresAPI",
+        "projectPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\PostGresAPI.csproj",
+        "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
+        "outputPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.305\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.DataContext\\EFCore.Common.DataContext.csproj": {
+                "projectPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.DataContext\\EFCore.Common.DataContext.csproj"
+              },
+              "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.EntityModels\\EFCore.Common.EntityModels.csproj": {
+                "projectPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common.EntityModels\\EFCore.Common.EntityModels.csproj"
+              },
+              "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common\\EFCore.Common.csproj": {
+                "projectPath": "D:\\Isitech\\Entity Framework\\EntityFramework\\EFCore.Common\\EFCore.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

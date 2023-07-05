@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using EFCore.Common.EntityModels;
 
 namespace PostGresAPI.Controllers;
 
@@ -56,7 +57,8 @@ public class BlogController : ControllerBase
         // Créer une instance de votre contexte de base de données (DbContext)
         // Créer une entité Blog à partir du modèle reçu
         var TagsList = new List<Tags>();
-         foreach (int tagId in Tags){
+        foreach (int tagId in Tags)
+        {
             var tag = await _context.Tags.FindAsync(tagId);
             if (tag == null)
             {

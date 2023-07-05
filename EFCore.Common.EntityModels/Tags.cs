@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PostgreSQL.Data
+namespace EFCore.Common.EntityModels
 {
-    public class Tags: BaseModel
+    public class Tags : BaseModel
     {
         [Key]
         public int TagId { get; set; }

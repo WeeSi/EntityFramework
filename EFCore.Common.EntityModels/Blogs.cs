@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PostgreSQL.Data
+namespace EFCore.Common.EntityModels
 {
-    public class Blogs: BaseModel
+    public class Blogs : BaseModel
     {
         [Key]
         public int BlogId { get; set; }
@@ -21,7 +21,7 @@ namespace PostgreSQL.Data
         public int CategoryId { get; set; }
         [ForeignKey(nameof(CategoryId))]
         public Categories Category { get; set; } = null!;
-        public ICollection<Comments> Comments { get; set;  } = new List<Comments>();
-        public ICollection<Tags> Tags { get; set;  } =  new List<Tags>();
+        public ICollection<Comments> Comments { get; set; } = new List<Comments>();
+        public ICollection<Tags> Tags { get; set; } = new List<Tags>();
     }
 }

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace PostgreSQL.Data
+namespace EFCore.Common.EntityModels
 {
     public class Categories : BaseModel
     {

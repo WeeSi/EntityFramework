@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PostgreSQL.Data;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using EFCore.Common.EntityModels;
 namespace PostGresAPI.Controllers;
 
 [ApiController]
