@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using EFCore.Common.EntityModels;
+using Microsoft.Extensions.Logging;
 
 namespace PostGresAPI.Controllers;
 
