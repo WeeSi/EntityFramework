@@ -12,7 +12,7 @@ namespace EFCore.Common.EntityModels
         public string UserName { get; set; } = String.Empty;
         [MaxLength(40)]
         public string UserMail { get; set; } = String.Empty;
-        public ICollection<Blogs> Blogs { get; set; } = new List<Blogs>();
-        public ICollection<Comments> Comments { get; set; } = new List<Comments>();
+        public ICollection<Blogs>? Blogs { get; set; } = new List<Blogs>();
+        public ICollection<Comments> Comments { get; } = new List<Comments>();
     }
 }

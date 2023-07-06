@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Common.EntityModels"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Common.DataContext", "EFCore.Common.DataContext\EFCore.Common.DataContext.csproj", "{4F9D0B76-5C84-4E19-B038-2C262E0FBFEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Common", "EFCore.Common\EFCore.Common.csproj", "{44CF4946-E023-4A05-BDFD-177E0EF580BC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.WebApi", "EFCore.WebApi\EFCore.WebApi.csproj", "{F419E0A9-5CCA-4B60-A684-A98EF3047469}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Common.Migrations", "EFCore.Common.Migrations\EFCore.Common.Migrations.csproj", "{7EA7E22A-1EBA-4119-A27C-756592442A03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +36,9 @@ Global
 		{F419E0A9-5CCA-4B60-A684-A98EF3047469}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F419E0A9-5CCA-4B60-A684-A98EF3047469}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F419E0A9-5CCA-4B60-A684-A98EF3047469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EA7E22A-1EBA-4119-A27C-756592442A03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA7E22A-1EBA-4119-A27C-756592442A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA7E22A-1EBA-4119-A27C-756592442A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA7E22A-1EBA-4119-A27C-756592442A03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

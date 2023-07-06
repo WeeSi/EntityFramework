@@ -32,7 +32,9 @@ namespace PostgreSQL.Data
         {
             // connect to postgres with connection string from app settings
             //options.UseNpgsql("USER ID = postgres; Password=password; Server=localhost; Port=5432; Database=EntityFramework; Integrated Security=true; Pooling=true;");
-            options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
+            options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"),
+            x => x.MigrationsAssembly("EFCore.Common.Migrations")
+            );
         }
         // protected override void OnModelCreating(ModelBuilder modelBuilder)
         // {

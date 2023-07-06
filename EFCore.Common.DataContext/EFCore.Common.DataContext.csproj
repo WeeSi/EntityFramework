@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EFCore.Common\EFCore.Common.csproj" />
     <ProjectReference Include="..\EFCore.Common.EntityModels\EFCore.Common.EntityModels.csproj" />
   </ItemGroup>
 

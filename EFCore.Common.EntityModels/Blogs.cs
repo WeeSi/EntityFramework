@@ -15,13 +15,14 @@ namespace EFCore.Common.EntityModels
         [MaxLength(150)]
         public string? Description { get; set; }
         public string Content { get; set; } = null!;
-        [ForeignKey(nameof(UserId))]
         public int UserId { get; set; }
-        // public Users User { get; set; } = null!;
+        [ForeignKey(nameof(UserId))]
+        public Users User { get; set; } = null!;
         public int CategoryId { get; set; }
         [ForeignKey(nameof(CategoryId))]
         public Categories Category { get; set; } = null!;
         public ICollection<Comments> Comments { get; set; } = new List<Comments>();
         public ICollection<Tags> Tags { get; set; } = new List<Tags>();
+        
     }
 }

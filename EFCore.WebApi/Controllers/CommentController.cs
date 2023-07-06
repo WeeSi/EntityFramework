@@ -5,6 +5,10 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using EFCore.Common.EntityModels;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace PostGresAPI.Controllers;
 
 [ApiController]
@@ -49,7 +53,14 @@ public class CommentController : ControllerBase
         {
             return NotFound($"Blog introuvable pour l'ID {BlogId}");
         }
+        var options = new JsonSerializerOptions
+        {
+            ReferenceHandler = ReferenceHandler.Preserve,
+            // Autres options de sérialisation si nécessaire
+        };
 
+        var userJson = JsonSerializer.Serialize(user, options);
+        var blogJson = JsonSerializer.Serialize(blog, options);
         // Créer une instance de votre contexte de base de données (DbContext)
         // Créer une entité Blog à partir du modèle reçu
         var commentEntity = new Comments
@@ -65,6 +76,6 @@ public class CommentController : ControllerBase
         // Enregistrer les modifications dans la base de données
         await _context.SaveChangesAsync();
 
-        return Ok(commentEntity);
+        return Ok(new {Comment= Comment, User= userJson, Blog= blogJson});
     }
 }
