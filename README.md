@@ -83,4 +83,15 @@ TODO:
 northwind => DB
 gérer base de donnée au sein d'une application avec entity avec l'approche code first
 
-TP: https://github.com/bendahmanem/ISITECH-ESI5-2223-EF/tree/main
+DOC: https://github.com/bendahmanem/ISITECH-ESI5-2223-EF/tree/main
+
+## Création de projet pour chaque partie du projet
+Lancement depuis le dossier source du projet
+### Création de la migration
+dotnet ef migrations add test --startup-project .\EFCore.WebApi\EFCore.WebApi.csproj --project .\EFCore.Common.Migrations\EFCore.Common.Migrations.csproj  --context AppDbContext
+
+### Lancement des migrations
+dotnet ef database update --project .\EFCore.Common.Migrations\ --startup-project .\EFCore.WebApi\EFCore.WebApi.csproj
+
+### Lancement du projet
+dotnet run --project .\EFCore.WebApi\

@@ -2,30 +2,27 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PostgreSQL.Data;
 
 #nullable disable
 
-namespace PostGresAPI.Migrations
+namespace EFCore.Common.Migrations.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230705075154_init")]
-    partial class init
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("PostgreSQL.Data.Blogs", b =>
+            modelBuilder.Entity("EFCore.Common.EntityModels.Blogs", b =>
                 {
                     b.Property<int>("BlogId")
                         .ValueGeneratedOnAdd()
@@ -59,19 +56,16 @@ namespace PostGresAPI.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("UsersUserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("BlogId");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UsersUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Blogs");
                 });
 
-            modelBuilder.Entity("PostgreSQL.Data.Categories", b =>
+            modelBuilder.Entity("EFCore.Common.EntityModels.Categories", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -89,7 +83,7 @@ namespace PostGresAPI.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("PostgreSQL.Data.Comments", b =>
+            modelBuilder.Entity("EFCore.Common.EntityModels.Comments", b =>
                 {
                     b.Property<int>("CommentId")
                         .ValueGeneratedOnAdd()
@@ -100,9 +94,6 @@ namespace PostGresAPI.Migrations
                     b.Property<int>("BlogId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("BlogsBlogId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasMaxLength(40)
@@ -111,19 +102,16 @@ namespace PostGresAPI.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("UsersUserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("CommentId");
 
-                    b.HasIndex("BlogsBlogId");
+                    b.HasIndex("BlogId");
 
-                    b.HasIndex("UsersUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("PostgreSQL.Data.Tags", b =>
+            modelBuilder.Entity("EFCore.Common.EntityModels.Tags", b =>
                 {
                     b.Property<int>("TagId")
                         .ValueGeneratedOnAdd()
@@ -146,7 +134,7 @@ namespace PostGresAPI.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("PostgreSQL.Data.Users", b =>
+            modelBuilder.Entity("EFCore.Common.EntityModels.Users", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -173,47 +161,59 @@ namespace PostGresAPI.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("PostgreSQL.Data.Blogs", b =>
+            modelBuilder.Entity("EFCore.Common.EntityModels.Blogs", b =>
                 {
-                    b.HasOne("PostgreSQL.Data.Categories", "Category")
+                    b.HasOne("EFCore.Common.EntityModels.Categories", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PostgreSQL.Data.Users", null)
+                    b.HasOne("EFCore.Common.EntityModels.Users", "User")
                         .WithMany("Blogs")
-                        .HasForeignKey("UsersUserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PostgreSQL.Data.Comments", b =>
+            modelBuilder.Entity("EFCore.Common.EntityModels.Comments", b =>
                 {
-                    b.HasOne("PostgreSQL.Data.Blogs", null)
+                    b.HasOne("EFCore.Common.EntityModels.Blogs", "Blog")
                         .WithMany("Comments")
-                        .HasForeignKey("BlogsBlogId");
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("PostgreSQL.Data.Users", null)
+                    b.HasOne("EFCore.Common.EntityModels.Users", "User")
                         .WithMany("Comments")
-                        .HasForeignKey("UsersUserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PostgreSQL.Data.Tags", b =>
+            modelBuilder.Entity("EFCore.Common.EntityModels.Tags", b =>
                 {
-                    b.HasOne("PostgreSQL.Data.Blogs", null)
+                    b.HasOne("EFCore.Common.EntityModels.Blogs", null)
                         .WithMany("Tags")
                         .HasForeignKey("BlogsBlogId");
                 });
 
-            modelBuilder.Entity("PostgreSQL.Data.Blogs", b =>
+            modelBuilder.Entity("EFCore.Common.EntityModels.Blogs", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("Tags");
                 });
 
-            modelBuilder.Entity("PostgreSQL.Data.Users", b =>
+            modelBuilder.Entity("EFCore.Common.EntityModels.Users", b =>
                 {
                     b.Navigation("Blogs");
 

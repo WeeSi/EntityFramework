@@ -5,6 +5,10 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using EFCore.Common.EntityModels;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace PostGresAPI.Controllers;
 
 [ApiController]
@@ -21,9 +25,15 @@ public class UserController : ControllerBase
     }
 
     [HttpGet(Name = "GetUsers")]
-    public IEnumerable<Users> Get()
+    public ActionResult<IList<Users>> Get()
     {
-        return _context.Users.ToList();
+        var options = new JsonSerializerOptions
+        {
+            ReferenceHandler = ReferenceHandler.Preserve,
+        };
+        List<Users> users = _context.Users.Include(b => b.Comments).Include(b => b.Blogs).ToList();
+        var jsonString = JsonSerializer.Serialize(users, options);
+         return Ok(new { users = JsonSerializer.Deserialize<JsonElement>(jsonString)});
     }
 
     [HttpPost]

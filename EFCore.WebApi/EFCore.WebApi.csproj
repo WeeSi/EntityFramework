@@ -16,7 +16,7 @@
   </ItemGroup>
 
     <ItemGroup>
-    <ProjectReference Include="..\EFCore.Common\EFCore.Common.csproj" />
+    <ProjectReference Include="..\EFCore.Common.Migrations\EFCore.Common.Migrations.csproj" />
     <ProjectReference Include="..\EFCore.Common.EntityModels\EFCore.Common.EntityModels.csproj" />
     <ProjectReference Include="..\EFCore.Common.DataContext\EFCore.Common.DataContext.csproj" />
   </ItemGroup>
